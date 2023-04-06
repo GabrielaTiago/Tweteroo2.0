@@ -1,8 +1,10 @@
 package com.tweteroo.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tweteroo.api.dtos.TweetDTO;
@@ -28,4 +30,7 @@ public class TweetsService {
         }
     }
 
+    public List<Tweet> getTweets(Pageable page) {
+        return tweetsRepository.findAll(page).getContent();
+    }
 }

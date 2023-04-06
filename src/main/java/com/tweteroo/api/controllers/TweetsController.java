@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,7 +37,13 @@ public class TweetsController {
 
     @GetMapping
     public List<Tweet> getTweets(
-            @PageableDefault(page = 0, size = 5, sort = "id", direction =  Sort.Direction.DESC) Pageable page) {
+            @PageableDefault(page = 0, size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable page) {
         return service.getTweets(page);
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<List<Tweet>> getTweetsByUsername(@PathVariable String username) { 
+        List<Tweet> clientTweets = service.getTweetsByUsername(username);
+        return ResponseEntity.status(HttpStatus.OK).body(clientTweets);
     }
 }

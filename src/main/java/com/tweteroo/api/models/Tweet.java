@@ -1,7 +1,5 @@
 package com.tweteroo.api.models;
 
-import javax.print.DocFlavor.STRING;
-
 import com.tweteroo.api.dtos.TweetDTO;
 
 import jakarta.persistence.Column;
